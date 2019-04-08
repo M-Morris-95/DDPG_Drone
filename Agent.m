@@ -6,7 +6,7 @@ obsInfo = rlNumericSpec([6 1],...
     'LowerLimit',[-1 -1 -1 -1 -1 -1]',...
     'UpperLimit',[ 1  1  1  1  1  1]');
 obsInfo.Name = 'observer';
-obsInfo.Description = 'yaw to target, pitch to target, dist to target';
+obsInfo.Description = 'dist X to target, dist Y to target, dist  Z to target,prev dist Z to target,prev dist Y to target,prev dist  Z to target';
 numObs = obsInfo.Dimension(1);
 
 % Specify actor information
@@ -14,7 +14,7 @@ actInfo = rlNumericSpec([3 1],...
     'LowerLimit',[-1 -1 -1]',...
     'UpperLimit',[ 1  1  1]');
 actInfo.Name = 'actor';
-obsInfo.Description = 'Xv,Yv,Zv';
+obsInfo.Description = 'X_vel,Y_vel,Z_vel';
 numAct = actInfo.Dimension(1);
 
 
@@ -55,9 +55,6 @@ criticNetwork = connectLayers(criticNetwork,'fc5','add/in2');
 criticOptions = rlRepresentationOptions('LearnRate',1e-03,'GradientThreshold',1,'UseDevice',"gpu");
 critic = rlRepresentation(criticNetwork,obsInfo,actInfo,'Observation',{'observation'},'Action',{'action'},criticOptions);
 
-
-
-
 % figure
 % plot(criticNetwork)
 
@@ -74,9 +71,7 @@ actorNetwork = [
     tanhLayer('Name','tanh1')];
 
 actorOptions = rlRepresentationOptions('LearnRate',1e-04,'GradientThreshold',1,'UseDevice',"gpu");
-
 actor = rlRepresentation(actorNetwork,obsInfo,actInfo,'Observation',{'observation'},'Action',{'tanh1'},actorOptions);
-
 
 % Create the DDPG agent
 agentOptions = rlDDPGAgentOptions(...
