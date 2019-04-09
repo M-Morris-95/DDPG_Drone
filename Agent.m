@@ -74,7 +74,7 @@ agentOptions = rlDDPGAgentOptions(...
     'DiscountFactor',0.98,...
     'MiniBatchSize',32);
 
-agentOpts.NumStepsToLookAhead = 16;
+agentOpts.NumStepsToLookAhead = 1;
 agentOpts.NoiseOptions.InitialAction = 0;
 agentOpts.NoiseOptions.Mean = 0;
 agentOpts.NoiseOptions.Variance = 0.3;
