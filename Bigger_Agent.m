@@ -79,11 +79,12 @@ agentOpts = rlDDPGAgentOptions(...
     'ResetExperienceBufferBeforeTraining',0,...
     'MiniBatchSize',32);
 
-agentOpts.NumStepsToLookAhead = 10;
-agentOpts.NoiseOptions.InitialAction = 0;
-agentOpts.NoiseOptions.Mean = 0;
-agentOpts.NoiseOptions.Variance = 0.25;                  % tried 0.3, v slow
-agentOpts.NoiseOptions.VarianceDecayRate = 0.4;
+agentOpts.NoiseOptions.InitialAction            = 0.0 ;
+agentOpts.NoiseOptions.Mean                     = 0.0 ;
+agentOpts.NoiseOptions.MeanAttractionConstant   = 1 ;
+agentOpts.NoiseOptions.Variance                 = 0.1;       % tried 0.3, v slow
+agentOpts.NoiseOptions.VarianceDecayRate        = 0.0 ;
+
 agent = rlDDPGAgent(actor,critic,agentOpts);
 
 
